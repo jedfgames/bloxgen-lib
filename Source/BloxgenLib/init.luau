@@ -1,3 +1,3 @@
-local BloxgenLib = {}
+const BloxgenLib = {}
 
 return BloxgenLib
