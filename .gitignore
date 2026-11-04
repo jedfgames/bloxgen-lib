@@ -2,7 +2,9 @@
 .claude
 .env
 .local
-.vscode
+/.vscode/*
+!/.vscode/extensions.json
+!/.vscode/settings.json
 *.bak
 *.gen.*
 *.lock
