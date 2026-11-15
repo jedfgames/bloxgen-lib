@@ -1,4 +1,4 @@
-name: Release checks
+name: Release / CI
 
 on:
   pull_request:
@@ -6,8 +6,8 @@ on:
       - release
 
 jobs:
-  pr-title:
-    name: Validate PR title
+  validate-pr-title:
+    name: validate-pr-title
     runs-on: ubuntu-latest
     steps:
       - name: Check PR title format
@@ -24,8 +24,8 @@ jobs:
 
           echo "PR title is valid."
 
-  diff-check:
-    name: Verify diff matches main
+  verify-diff-matches-main:
+    name: verify-diff-matches-main
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -49,8 +49,8 @@ jobs:
 
           echo "PR branch matches main exactly."
 
-  format:
-    name: Check formatting
+  check-formatting:
+    name: check-formatting
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -64,8 +64,8 @@ jobs:
       - name: Check formatting
         run: ./Submodules/luau-cicd/Scripts/CheckFormatting.exec.luau
 
-  test:
-    name: Run tests
+  run-tests:
+    name: run-tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -82,8 +82,8 @@ jobs:
       - name: Run tests
         run: ./Scripts/RunTests.exec.luau
 
-  analyze:
-    name: Static analysis
+  static-analysis:
+    name: static-analysis
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -98,13 +98,13 @@ jobs:
         run: wally install
 
       - name: Setup Lune typedefs
-        run: lune setup --no-update-luaurc
+        run: lune setup
 
       - name: Run static analysis
         run: ./Submodules/luau-cicd/Scripts/RunStaticAnalysis.exec.luau
 
-  version:
-    name: Validate version
+  validate-version:
+    name: validate-version
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
